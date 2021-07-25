@@ -1,13 +1,12 @@
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
 
 @Component({
 // tslint:disable-next-line:component-selector
   selector: 'fb-trix-editor',
   template: `
     <form>
-      <input id="x" type="hidden" name="content" #input>
-      <trix-editor #trixEditor class="trix-content" input="x"
-      ></trix-editor>
+      <input [id]="index" type="hidden" name="content" #input>
+      <trix-editor #trixEditor class="trix-content" [attr.input]="index"></trix-editor>
     </form>
 
     <button (click)="save()">Save</button>
@@ -16,16 +15,17 @@ import {Component, Input, OnInit, ViewChild} from "@angular/core";
     output: <br>
 
     <pre>{{output | json}}</pre>
+
+
+    <div [innerHTML]="output"></div>
   `
 })
 export class TrixComponent  {
-  @ViewChild('trixEditor') trixEditor!: any;
-  @ViewChild('input') input!: any;
+  @ViewChild('trixEditor', { static: true}) trixEditor!: any;
+  @ViewChild('input', { static: true}) input!: ElementRef;
+  @Input() index!: string;
 
   output: string = '';
-
-  // DRAG AND DROP NESTED DEMO
-  // https://stackblitz.com/edit/nested-connected-lists?file=app%2Fcdk-drag-drop-connected-sorting-group-example.html
 
   /**
    * Init Editor
