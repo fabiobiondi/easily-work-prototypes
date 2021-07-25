@@ -1,13 +1,12 @@
 import {Component, Input, ViewChild} from '@angular/core';
 
 @Component({
-  selector: 'fb-root',
+  selector: 'fb-demo-trix',
   template: `
-
-    <router-outlet></router-outlet>
 
   `,
   styles: []
 })
-export class AppComponent {
+export class DemoTrixComponent {
+
 }
